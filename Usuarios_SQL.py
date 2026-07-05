@@ -8,10 +8,10 @@ app.secret_key = "clave_secreta_examen"
 
 DB_NAME = 'usuarios_examen.db'
 
-# ====================== CONFIGURACIÓN BASE DE DATOS ======================
+
 def init_db():
     conn = sqlite3.connect(DB_NAME)
-    cursor = conn.cursor()
+    cursor = conn.cursor()S
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS usuarios (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -26,7 +26,6 @@ def init_db():
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
-# ====================== REGISTRO DE USUARIOS (Integrantes) ======================
 def registrar_integrantes():
     init_db()
     conn = sqlite3.connect(DB_NAME)
@@ -34,8 +33,6 @@ def registrar_integrantes():
 
     integrantes = [
         ("Amanda Gajardo", "Examen123"),
-        # Agrega aquí los demás integrantes del grupo
-        # ("Nombre Apellido", "SuContraseña"),
     ]
 
     fecha = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -49,7 +46,6 @@ def registrar_integrantes():
     conn.commit()
     conn.close()
 
-# ====================== RUTAS WEB ======================
 @app.route('/')
 def home():
     return """
@@ -85,7 +81,6 @@ def login():
         </form>
     '''
 
-# ====================== INICIO ======================
 if __name__ == '__main__':
     registrar_integrantes()
     print("Base de datos creada y usuarios registrados.")
